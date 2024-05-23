@@ -7,4 +7,6 @@ public interface AccountService {
     AccountDto createAccount(AccountDto accounDto);
 
     AccountDto getAccountById(Long id);
+
+    AccountDto deposit(Long id, Double amount);
 }
