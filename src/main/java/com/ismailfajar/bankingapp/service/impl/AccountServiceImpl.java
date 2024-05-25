@@ -7,8 +7,6 @@ import com.ismailfajar.bankingapp.repository.AccountRepository;
 import com.ismailfajar.bankingapp.service.AccountService;
 import org.springframework.stereotype.Service;
 
-import javax.security.auth.login.AccountNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -65,5 +63,13 @@ public class AccountServiceImpl implements AccountService {
         List<Account> accounts = accountRepository.findAll();
         return accounts.stream().map((account) -> AccountMapper.mapToAccountDto(account))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteAccount(Long id) {
+        Account account = accountRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Account does not exist"));
+        accountRepository.deleteById(id);
+
     }
 }
